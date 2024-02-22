@@ -93,7 +93,7 @@ public class CustomerImpl implements Customer {
 
     public void setAddress(String address) throws InvalidFieldException {
         if (address == null || address.isBlank()) {
-            throw new InvalidFieldException("Ypu cannot enter an empty address!");
+            throw new InvalidFieldException("You cannot enter an empty address!");
         }
 
         if (isValidAddress(address)) {
