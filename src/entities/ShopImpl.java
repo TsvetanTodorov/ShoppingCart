@@ -78,6 +78,12 @@ public class ShopImpl implements Shop {
     @Override
     public void checkAllProductsAvailability() {
 
+
+        for (Map.Entry<String, Product> productEntry : products.entrySet()) {
+            System.out.println("Available products:");
+            System.out.printf("%s , Price: %.2f, Quantity: %d\n",
+                    productEntry.getValue().getName(), productEntry.getValue().getPrice(), productEntry.getValue().getQuantity());
+        }
     }
 
     private void setNewProductInfo(Product newProduct) {
