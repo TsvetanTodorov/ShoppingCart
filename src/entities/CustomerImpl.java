@@ -3,8 +3,8 @@ package entities;
 import exceptions.InvalidFieldException;
 import interfaces.Customer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,7 +15,7 @@ public class CustomerImpl implements Customer {
     private String phoneNumber;
     private String address;
     private String city;
-    private List<Product> shoppingCart = new ArrayList<>();
+    private Map<String, Product> shoppingCart = new HashMap<>();
 
 
     public CustomerImpl() {
@@ -24,6 +24,11 @@ public class CustomerImpl implements Customer {
     @Override
     public void checkShoppingCart() {
 
+        System.out.println("Products in your shopping cart:");
+        for (Map.Entry<String, Product> productEntry : shoppingCart.entrySet()) {
+            System.out.printf("%s , Quantity: %d\n",
+                    productEntry.getValue().getName(), productEntry.getValue().getQuantity());
+        }
     }
 
     @Override
@@ -37,13 +42,44 @@ public class CustomerImpl implements Customer {
     }
 
     @Override
+    //TODO!!!
+    //When want to add new quantity of the product, counts only the new one.
     public void buyProduct(Product product) {
+        shoppingCart.put(product.getName(), product);
+    }
+
+    @Override
+    public void returnProduct(Product product) throws InvalidFieldException {
+        if (isNotExistingProduct(product)) {
+            throw new InvalidFieldException("You don't have this type of product in your shopping cart!");
+        }
+
+        int quantityToReturn = product.getQuantity();
+        if (shoppingCart.get(product.getName()).getQuantity() < quantityToReturn) {
+            throw new InvalidFieldException(String.format("You don't have that many Product: %s in your shopping cart\n", product.getName()));
+        }
+
+        if (quantityToReturn == 1) {
+            System.out.printf("Successfully returned %d %s from your shopping cart!\n",
+                    quantityToReturn, product.getName());
+        } else {
+            System.out.printf("Successfully returned %d %ss from your shopping cart!\n",
+                    quantityToReturn, product.getName());
+        }
 
     }
 
     @Override
-    public void returnProduct(Product product) {
-
+    public void info() {
+        System.out.println();
+        System.out.println("Let's get started!");
+        System.out.println("Here is the list with all the commands you can use:");
+        System.out.println("Buy Product -> Example: buy-milk-2");
+        System.out.println("Return Product -> Example: return-milk-1");
+        System.out.println("Check what's in your shopping cart: Example: check");
+        System.out.println("Check what's available in the shop: Example: check all");
+        System.out.println("If you want to check all these commands again just type help");
+        System.out.println("But First Let's add some products to the shop! Example add-juice-10-2.50");
     }
 
     public void setName(String name) throws InvalidFieldException {
@@ -73,6 +109,7 @@ public class CustomerImpl implements Customer {
             }
 
             this.age = parsedAge;
+            return;
         }
 
         throw new InvalidFieldException("Invalid age! Please enter a valid age:");
@@ -88,7 +125,7 @@ public class CustomerImpl implements Customer {
             return;
         }
 
-        throw new InvalidFieldException("Invalid phone number! The length of your phone number must be 10 digits!" +
+        throw new InvalidFieldException("Invalid phone number! The length of your phone number must be 10 digits! " +
                 "Please re-enter your phone number:");
     }
 
@@ -120,7 +157,7 @@ public class CustomerImpl implements Customer {
     }
 
     private boolean isValidName(String name) {
-        Pattern pattern = Pattern.compile("^(?:[a-zA-Z]+(?:-[a-zA-Z]+)?(?: [a-zA-Z]+)?)$");
+        Pattern pattern = Pattern.compile("^(?:[a-zA-Z]+(?:-[a-zA-Z]+)?(?: [a-zA-Z]+)?){2,}$");
         Matcher matcher = pattern.matcher(name);
 
         return matcher.matches();
@@ -156,5 +193,9 @@ public class CustomerImpl implements Customer {
         Matcher matcher = pattern.matcher(city);
 
         return matcher.matches();
+    }
+
+    private boolean isNotExistingProduct(Product product) {
+        return !shoppingCart.containsKey(product.getName());
     }
 }

@@ -1,6 +1,7 @@
 package interfaces;
 
 import entities.Product;
+import exceptions.InvalidFieldException;
 
 public interface Customer {
 
@@ -12,7 +13,9 @@ public interface Customer {
 
     void buyProduct(Product product);
 
-    void returnProduct(Product product);
+    void returnProduct(Product product) throws InvalidFieldException;
+
+    void info();
 
 
 

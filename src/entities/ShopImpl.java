@@ -45,8 +45,15 @@ public class ShopImpl implements Shop {
 
         existingProduct.setQuantity(existingProduct.getQuantity() - productToBuy.getQuantity());
 
-        System.out.printf("You successfully added %s to your shopping cart!\n", productToBuyName);
+        if (productToBuy.getQuantity() == 1) {
+            System.out.printf("You successfully added %d %s to your shopping cart!\n",
+                    productToBuy.getQuantity(), productToBuyName);
+        } else {
+            System.out.printf("You successfully added %d %ss to your shopping cart!\n",
+                    productToBuy.getQuantity(), productToBuyName);
+        }
         System.out.println("Would you like to buy anything else ?");
+
     }
 
     @Override
@@ -78,9 +85,8 @@ public class ShopImpl implements Shop {
     @Override
     public void checkAllProductsAvailability() {
 
-
+        System.out.println("Available products in the shop:");
         for (Map.Entry<String, Product> productEntry : products.entrySet()) {
-            System.out.println("Available products:");
             System.out.printf("%s , Price: %.2f, Quantity: %d\n",
                     productEntry.getValue().getName(), productEntry.getValue().getPrice(), productEntry.getValue().getQuantity());
         }

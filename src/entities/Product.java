@@ -60,6 +60,7 @@ public class Product {
 
         if (isValidQuantity(quantity)) {
             this.quantity = Integer.parseInt(quantity);
+            return;
         }
 
         throw new InvalidFieldException("Invalid product quantity! Please enter a valid product quantity:");
@@ -96,7 +97,7 @@ public class Product {
     }
 
     private boolean isValidQuantity(String quantity) {
-        Pattern pattern = Pattern.compile("^(?![0]$\\d{1,4}$)");
+        Pattern pattern = Pattern.compile("^(?![0]$)\\d{1,4}$");
         Matcher matcher = pattern.matcher(quantity);
 
         return matcher.matches();

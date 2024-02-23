@@ -26,6 +26,7 @@ public class CustomerService {
 
     private void createCustomerName(CustomerImpl customerImpl, Scanner scanner) {
         System.out.println("Please enter your name:");
+        System.out.println("Your name should be at least 2 digits long!");
         String name = scanner.nextLine();
         while (true) {
             try {
@@ -56,6 +57,7 @@ public class CustomerService {
 
     private void createCustomerPhoneNumber(CustomerImpl customerImpl, Scanner scanner) {
         System.out.println("Please enter your phone number:");
+        System.out.println("The length of your phone number must be 10 digits!");
         String phoneNumber = scanner.nextLine();
         while (true) {
             try {
@@ -71,7 +73,7 @@ public class CustomerService {
 
     private void createCustomerAddress(CustomerImpl customerImpl, Scanner scanner) {
         System.out.println("Please enter your address:");
-        System.out.println("Your address must be at the street's name and the number, separated with comma.");
+        System.out.println("Your address must be the street's name and the number, separated with comma.");
         System.out.println("For Example: President Lincoln,66");
         String address = scanner.nextLine();
         while (true) {
