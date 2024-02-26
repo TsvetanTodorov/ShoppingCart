@@ -1,8 +1,11 @@
 package entities;
 
+import Constants.ShoppingConstants;
 import exceptions.InvalidFieldException;
 import interfaces.Customer;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -23,7 +26,6 @@ public class CustomerImpl implements Customer {
 
     @Override
     public void checkShoppingCart() {
-
         System.out.println("Products in your shopping cart:");
         for (Map.Entry<String, Product> productEntry : shoppingCart.entrySet()) {
             System.out.printf("%s , Quantity: %d\n",
@@ -33,19 +35,26 @@ public class CustomerImpl implements Customer {
 
     @Override
     public void cashOut() {
-
+        System.out.println("Your total cost is: " + calculateTotalSum());
+        System.out.println("Goodbye!");
     }
 
     @Override
     public void help() {
-
+        for (int i = 0; i < ShoppingConstants.commandsArr.length; i++) {
+            System.out.println("Command: " + ShoppingConstants.commandsArr[i] + "  -> " + ShoppingConstants.commandsDescription[i]);
+        }
     }
 
     @Override
-    //TODO!!!
-    //When want to add new quantity of the product, counts only the new one.
     public void buyProduct(Product product) {
-        shoppingCart.put(product.getName(), product);
+        if (shoppingCart.containsKey(product.getName())) {
+            Product existingProduct = shoppingCart.get(product.getName());
+            existingProduct.setQuantity(existingProduct.getQuantity() + product.getQuantity());
+            existingProduct.setPrice(product.getPrice());
+        } else {
+            shoppingCart.put(product.getName(), product);
+        }
     }
 
     @Override
@@ -58,6 +67,9 @@ public class CustomerImpl implements Customer {
         if (shoppingCart.get(product.getName()).getQuantity() < quantityToReturn) {
             throw new InvalidFieldException(String.format("You don't have that many Product: %s in your shopping cart\n", product.getName()));
         }
+
+        Product existingProduct = shoppingCart.get(product.getName());
+        existingProduct.setQuantity(existingProduct.getQuantity() - quantityToReturn);
 
         if (quantityToReturn == 1) {
             System.out.printf("Successfully returned %d %s from your shopping cart!\n",
@@ -197,5 +209,16 @@ public class CustomerImpl implements Customer {
 
     private boolean isNotExistingProduct(Product product) {
         return !shoppingCart.containsKey(product.getName());
+    }
+
+    private double calculateTotalSum() {
+
+        double totalPrice = 0;
+        for (Map.Entry<String, Product> productEntry : shoppingCart.entrySet()) {
+            totalPrice += productEntry.getValue().getQuantity() * productEntry.getValue().getPrice();
+        }
+
+        BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 }

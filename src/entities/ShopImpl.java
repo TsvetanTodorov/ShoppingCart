@@ -4,6 +4,7 @@ import exceptions.InvalidFieldException;
 import interfaces.Shop;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ShopImpl implements Shop {
@@ -32,7 +33,7 @@ public class ShopImpl implements Shop {
 
     @Override
     public void buyProduct(Product productToBuy) throws InvalidFieldException {
-        if (isExistingProduct(productToBuy)) {
+        if (isNotExistingProduct(productToBuy)) {
             throw new InvalidFieldException("Sorry we don't have this product in the shop!");
         }
 
@@ -58,7 +59,7 @@ public class ShopImpl implements Shop {
 
     @Override
     public void returnProduct(Product product) {
-        if (isExistingProduct(product)) {
+        if (isNotExistingProduct(product)) {
             products.put(product.getName(), product);
         } else {
             String productToAdd = product.getName();
@@ -84,7 +85,6 @@ public class ShopImpl implements Shop {
 
     @Override
     public void checkAllProductsAvailability() {
-
         System.out.println("Available products in the shop:");
         for (Map.Entry<String, Product> productEntry : products.entrySet()) {
             System.out.printf("%s , Price: %.2f, Quantity: %d\n",
@@ -104,7 +104,7 @@ public class ShopImpl implements Shop {
         currentProduct.setPrice(averagePrice);
     }
 
-    private boolean isExistingProduct(Product product) {
+    private boolean isNotExistingProduct(Product product) {
         return !products.containsKey(product.getName());
     }
 
@@ -112,5 +112,17 @@ public class ShopImpl implements Shop {
         int quantityToBuy = productToBuy.getQuantity();
 
         return existingProduct.getQuantity() < quantityToBuy;
+    }
+
+    public Map<String, Product> getProducts() {
+        return products;
+    }
+
+    public Product getProduct(String productName) {
+        if (products.containsKey(productName)) {
+            return products.get(productName);
+        }
+
+        return null;
     }
 }
