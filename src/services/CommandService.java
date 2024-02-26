@@ -72,6 +72,10 @@ public class CommandService {
                 case "cash out":
                     customer.cashOut();
                     return;
+                default:
+                    System.out.println("Nonexistent command!");
+                    System.out.println("If you want to know all the available commands type help.");
+                    break;
             }
 
             command = scanner.nextLine();
