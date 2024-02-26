@@ -48,4 +48,25 @@ public interface ShoppingConstants {
             "Please enter your city:"
     };
 
+
+    int CUSTOMER_DATA_INFO_PRODUCTS_IN_CART = 0;
+    int CUSTOMER_DATA_INFO_TOTAL_COST = 1;
+    int CUSTOMER_DATA_INFO_THANKS_FOR_THE_SUPPORT = 2;
+    int CUSTOMER_DATA_INFO_NOT_EXISTING_PRODUCT_IN_SHOPPING_CART = 3;
+    int CUSTOMER_DATA_INFO_NOT_ENOUGH_PRODUCT_IN_SHOPPING_CART = 4;
+    int CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCT = 5;
+    int CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCTS = 6;
+
+    String[] CUSTOMER_DATA_INFO_VALUES = {
+            "Products in your shopping cart:",
+            "Your total cost is: ",
+            "Dear %s, Thank you for supporting my shop!",
+            "You don't have this type of product in your shopping cart!",
+            "You don't have that many Product: %s in your shopping cart\n",
+            "Successfully returned %d %s from your shopping cart!\n",
+            "Successfully returned %d %ss from your shopping cart!\n"
+
+    };
+
+
 }

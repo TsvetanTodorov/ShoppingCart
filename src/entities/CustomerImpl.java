@@ -26,24 +26,17 @@ public class CustomerImpl implements Customer {
 
     @Override
     public void checkShoppingCart() {
-        System.out.println("Products in your shopping cart:");
-        for (Map.Entry<String, Product> productEntry : shoppingCart.entrySet()) {
-            System.out.printf("%s , Quantity: %d\n",
-                    productEntry.getValue().getName(), productEntry.getValue().getQuantity());
-        }
+        printShoppingCartInfo();
     }
 
     @Override
     public void cashOut() {
-        System.out.println("Your total cost is: " + calculateTotalSum());
-        System.out.printf("Dear %s, Thank you for supporting my shop!", this.name);
+        printCashOutInfo();
     }
 
     @Override
     public void help() {
-        for (int i = 0; i < ShoppingConstants.commandsArr.length; i++) {
-            System.out.println("Command: " + ShoppingConstants.commandsArr[i] + "  -> " + ShoppingConstants.commandsDescription[i]);
-        }
+        printHelpCommandInfo();
     }
 
     @Override
@@ -60,23 +53,24 @@ public class CustomerImpl implements Customer {
     @Override
     public void returnProduct(Product product) throws InvalidFieldException {
         if (isNotExistingProduct(product)) {
-            throw new InvalidFieldException("You don't have this type of product in your shopping cart!");
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_NOT_EXISTING_PRODUCT_IN_SHOPPING_CART]);
         }
 
         int quantityToReturn = product.getQuantity();
         if (shoppingCart.get(product.getName()).getQuantity() < quantityToReturn) {
-            throw new InvalidFieldException(String.format("You don't have that many Product: %s in your shopping cart\n", product.getName()));
+            throw new InvalidFieldException(String.format(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_NOT_ENOUGH_PRODUCT_IN_SHOPPING_CART], product.getName()));
         }
 
         Product existingProduct = shoppingCart.get(product.getName());
         existingProduct.setQuantity(existingProduct.getQuantity() - quantityToReturn);
 
-        if (quantityToReturn == 1) {
-            System.out.printf("Successfully returned %d %s from your shopping cart!\n",
-                    quantityToReturn, product.getName());
+
+        if (isEqualsOne(quantityToReturn)) {
+            printSuccessfullyReturnedOneProduct(quantityToReturn, product);
         } else {
-            System.out.printf("Successfully returned %d %ss from your shopping cart!\n",
-                    quantityToReturn, product.getName());
+            printSuccessfullyReturnedManyProducts(quantityToReturn, product);
         }
 
     }
@@ -225,4 +219,40 @@ public class CustomerImpl implements Customer {
         System.out.println("If you want to check all these commands again just type help");
         System.out.println("But First Let's add some products to the shop! Example add-juice-10-2.50");
     }
+
+    private void printHelpCommandInfo() {
+        for (int i = 0; i < ShoppingConstants.commandsArr.length; i++) {
+            System.out.println("Command: " + ShoppingConstants.commandsArr[i] + "  -> " + ShoppingConstants.commandsDescription[i]);
+        }
+    }
+
+    private void printShoppingCartInfo() {
+        System.out.println(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_PRODUCTS_IN_CART]);
+        for (Map.Entry<String, Product> productEntry : shoppingCart.entrySet()) {
+            System.out.printf("%s , Quantity: %d\n",
+                    productEntry.getValue().getName(), productEntry.getValue().getQuantity());
+        }
+    }
+
+    private void printCashOutInfo() {
+        System.out.println(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_TOTAL_COST]
+                + calculateTotalSum());
+        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_THANKS_FOR_THE_SUPPORT]
+                , this.name);
+    }
+
+    private boolean isEqualsOne(int quantityToReturn) {
+        return quantityToReturn == 1;
+    }
+
+    private void printSuccessfullyReturnedOneProduct(int quantityToReturn, Product product) {
+        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCT],
+                quantityToReturn, product.getName());
+    }
+
+    private void printSuccessfullyReturnedManyProducts(int quantityToReturn, Product product) {
+        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCTS],
+                quantityToReturn, product.getName());
+    }
 }
+

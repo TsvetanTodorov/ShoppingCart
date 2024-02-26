@@ -12,9 +12,9 @@ public class ShopImpl implements Shop {
     private Map<String, Product> products = new HashMap<>();
 
     public ShopImpl() throws InvalidFieldException {
-        products.put("milk", new Product("Milk", "2.50", "10"));
-        products.put("bread", new Product("Bread", "1.50", "15"));
-        products.put("egg", new Product("Egg", "0.50", "100"));
+        products.put("milk", new Product("milk", "2.50", "10"));
+        products.put("bread", new Product("bread", "1.50", "15"));
+        products.put("egg", new Product("egg", "0.50", "100"));
     }
 
     @Override
@@ -45,6 +45,9 @@ public class ShopImpl implements Shop {
         }
 
         existingProduct.setQuantity(existingProduct.getQuantity() - productToBuy.getQuantity());
+        if (existingProduct.getQuantity() == 0) {
+            products.remove(existingProduct.getName().toLowerCase());
+        }
 
         if (productToBuy.getQuantity() == 1) {
             System.out.printf("You successfully added %d %s to your shopping cart!\n",
