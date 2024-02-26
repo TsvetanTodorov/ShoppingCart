@@ -16,17 +16,27 @@ public class CommandService {
         this.customer = customer;
     }
 
-    public void runCommands(String command, Scanner scanner) throws InvalidFieldException {
+    public void runCommands(String command, Scanner scanner) {
         while (!command.equals("Cash Out")) {
             Product product;
-
             String[] commandArr = command.split("-");
+
+            if (commandArr.length < 3) {
+                System.out.println("Invalid command");
+                command = scanner.nextLine();
+                continue;
+            }
             String commandType = commandArr[0];
             String productName = commandArr[1];
             String quantity = commandArr[2];
             Product currentProduct;
             switch (commandType) {
                 case "add":
+                    if (commandArr.length != 4) {
+                        System.out.println("Invalid command");
+                        command = scanner.nextLine();
+                        continue;
+                    }
                     String price = commandArr[3];
                     try {
                         product = new Product(productName, price, quantity);
