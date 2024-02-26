@@ -1,8 +1,10 @@
 package services;
 
+import constants.ShoppingConstants;
 import entities.CustomerImpl;
 import exceptions.InvalidFieldException;
 
+import java.util.PrimitiveIterator;
 import java.util.Scanner;
 
 public class CustomerService {
@@ -19,14 +21,13 @@ public class CustomerService {
         createCustomerAddress(customerImpl, scanner);
         createCustomerCity(customerImpl, scanner);
 
-        System.out.println("Your registration was created successfully!");
+        printCustomerSuccessRegistration();
 
         return customerImpl;
     }
 
     private void createCustomerName(CustomerImpl customerImpl, Scanner scanner) {
-        System.out.println("Please enter your name:");
-        System.out.println("Your name should be at least 2 digits long!");
+        printCustomerNameInfo();
         String name = scanner.nextLine();
         while (true) {
             try {
@@ -41,7 +42,7 @@ public class CustomerService {
     }
 
     private void createCustomerAge(CustomerImpl customerImpl, Scanner scanner) {
-        System.out.println("Please enter your age:");
+        printCustomerAgeInfo();
         String age = scanner.nextLine();
         while (true) {
             try {
@@ -56,8 +57,7 @@ public class CustomerService {
     }
 
     private void createCustomerPhoneNumber(CustomerImpl customerImpl, Scanner scanner) {
-        System.out.println("Please enter your phone number:");
-        System.out.println("The length of your phone number must be 10 digits!");
+        printCustomerPhoneNumberInfo();
         String phoneNumber = scanner.nextLine();
         while (true) {
             try {
@@ -72,9 +72,7 @@ public class CustomerService {
     }
 
     private void createCustomerAddress(CustomerImpl customerImpl, Scanner scanner) {
-        System.out.println("Please enter your address:");
-        System.out.println("Your address must be the street's name and the number, separated with comma.");
-        System.out.println("For Example: President Lincoln,66");
+        printCustomerAddressInfo();
         String address = scanner.nextLine();
         while (true) {
             try {
@@ -89,7 +87,7 @@ public class CustomerService {
     }
 
     private void createCustomerCity(CustomerImpl customerImpl, Scanner scanner) {
-        System.out.println("Please enter your city:");
+        printCustomerCityInfo();
         String city = scanner.nextLine();
         while (true) {
             try {
@@ -104,4 +102,31 @@ public class CustomerService {
     }
 
 
+    private void printCustomerSuccessRegistration() {
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_SUCCESSFULLY_REGISTERED]);
+    }
+
+    private void printCustomerNameInfo() {
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_ENTER_NAME]);
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_VALID_NAME_DIGITS]);
+    }
+
+    private void printCustomerAgeInfo() {
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_ENTER_AGE]);
+    }
+
+    private void printCustomerPhoneNumberInfo() {
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_ENTER_PHONE_NUMBER]);
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_VALID_PHONE_NUMBER_LENGTH]);
+    }
+
+    private void printCustomerAddressInfo() {
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_ENTER_ADDRESS]);
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_VALID_ADDRESS_ORDER]);
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_ADDRESS_EXAMPLE]);
+    }
+
+    private void printCustomerCityInfo() {
+        System.out.println(ShoppingConstants.GREETINGS_VALUES[ShoppingConstants.GREETINGS_ENTER_CITY]);
+    }
 }
