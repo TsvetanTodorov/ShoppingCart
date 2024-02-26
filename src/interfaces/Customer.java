@@ -13,7 +13,7 @@ public interface Customer {
 
     void buyProduct(Product product);
 
-    void returnProduct(Product product) throws InvalidFieldException;
+    Product returnProduct(Product product) throws InvalidFieldException;
 
     void info();
 

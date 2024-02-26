@@ -22,10 +22,11 @@ public class CommandService {
 
             String[] commandArr = command.split("-");
             String commandType = commandArr[0];
+            String productName = commandArr[1];
+            String quantity = commandArr[2];
+            Product currentProduct;
             switch (commandType) {
                 case "add":
-                    String productName = commandArr[1];
-                    String quantity = commandArr[2];
                     String price = commandArr[3];
                     try {
                         product = new Product(productName, price, quantity);
@@ -44,21 +45,18 @@ public class CommandService {
                     productName = commandArr[1];
                     quantity = commandArr[2];
                     try {
-                        customer.returnProduct(new Product(productName, quantity));
+                        currentProduct = customer.returnProduct(new Product(productName, quantity));
                     } catch (InvalidFieldException e) {
                         System.out.println(e.getMessage());
                         break;
                     }
-                    shop.returnProduct(new Product(productName, quantity));
+                    shop.returnProduct(currentProduct);
                     break;
                 case "buy":
                     try {
                         productName = commandArr[1];
                         quantity = commandArr[2];
-                        Product currentProduct = shop.getProduct(productName);
-                        if (currentProduct == null) {
-                            break;
-                        }
+                        currentProduct = shop.getProduct(productName);
                         shop.buyProduct(new Product(productName, quantity));
                         Product productToBuy = new Product(productName, String.valueOf(currentProduct.getPrice()), quantity);
                         customer.buyProduct(productToBuy);

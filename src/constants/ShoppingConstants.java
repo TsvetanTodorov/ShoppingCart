@@ -56,6 +56,19 @@ public interface ShoppingConstants {
     int CUSTOMER_DATA_INFO_NOT_ENOUGH_PRODUCT_IN_SHOPPING_CART = 4;
     int CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCT = 5;
     int CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCTS = 6;
+    int CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_NAME = 7;
+    int CUSTOMER_DATA_INFO_INVALID_NAME_ENTER_VALID_NAME = 8;
+    int CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_AGE = 9;
+    int CUSTOMER_DATA_INFO_TELL_US_YOUR_REAL_AGE = 10;
+    int CUSTOMER_DATA_INFO_INVALID_AGE_ENTER_VALID_AGE = 11;
+    int CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_PHONE_NUMBER = 12;
+    int CUSTOMER_DATA_INFO_INVALID_PHONE_NUMBER_THE_LENGTH_MUST_BE_10_DIGITS = 13;
+    int CUSTOMER_DATA_INFO_RE_ENTER_PHONE_NUMBER = 14;
+    int CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_ADDRESS = 15;
+    int CUSTOMER_DATA_INFO_INVALID_ADDRESS_ENTER_VALID_ADDRESS = 16;
+    int CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_CITY = 17;
+    int CUSTOMER_DATA_INFO_INVALID_CITY_ENTER_VALID_CITY = 18;
+
 
     String[] CUSTOMER_DATA_INFO_VALUES = {
             "Products in your shopping cart:",
@@ -64,7 +77,19 @@ public interface ShoppingConstants {
             "You don't have this type of product in your shopping cart!",
             "You don't have that many Product: %s in your shopping cart\n",
             "Successfully returned %d %s from your shopping cart!\n",
-            "Successfully returned %d %ss from your shopping cart!\n"
+            "Successfully returned %d %ss from your shopping cart!\n",
+            "You cannot enter an empty name!",
+            "Invalid name! Please enter a valid name:",
+            "You cannot enter an empty age!",
+            "You're joking right? Now tell us the real age of yours:",
+            "Invalid age! Please enter a valid age:",
+            "You cannot enter an empty phone number!",
+            "Invalid phone number! The length of your phone number must be 10 digits! ",
+            "Please re-enter your phone number:",
+            "You cannot enter an empty address!",
+            "Invalid address! Please enter a valid address:",
+            "You cannot enter an empty city!",
+            "Invalid city! Please enter a valid city:"
 
     };
 

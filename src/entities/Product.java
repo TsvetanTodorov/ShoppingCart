@@ -24,7 +24,7 @@ public class Product {
 
 
     public void setName(String name) throws InvalidFieldException {
-        if (name == null || name.isBlank()) {
+        if (isNullOrBlank(name)) {
             throw new InvalidFieldException("You cannot enter an empty name of the product!");
         }
 
@@ -37,7 +37,7 @@ public class Product {
     }
 
     public void setPrice(String price) throws InvalidFieldException {
-        if (price == null || price.isBlank()) {
+        if (isNullOrBlank(price)) {
             throw new InvalidFieldException("You cannot enter an empty price for the product!");
         }
 
@@ -54,7 +54,7 @@ public class Product {
     }
 
     public void setQuantity(String quantity) throws InvalidFieldException {
-        if (quantity == null || quantity.isBlank()) {
+        if (isNullOrBlank(quantity)) {
             throw new InvalidFieldException("You cannot enter an empty product quantity!");
         }
 
@@ -101,5 +101,9 @@ public class Product {
         Matcher matcher = pattern.matcher(quantity);
 
         return matcher.matches();
+    }
+
+    private boolean isNullOrBlank(String currentValue) {
+        return currentValue == null || currentValue.isBlank();
     }
 }
