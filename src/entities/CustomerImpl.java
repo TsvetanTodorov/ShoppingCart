@@ -36,7 +36,7 @@ public class CustomerImpl implements Customer {
     @Override
     public void cashOut() {
         System.out.println("Your total cost is: " + calculateTotalSum());
-        System.out.println("Goodbye!");
+        System.out.printf("Dear %s, Thank you for supporting my shop!", this.name);
     }
 
     @Override
