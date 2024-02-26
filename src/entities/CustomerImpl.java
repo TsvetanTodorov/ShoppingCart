@@ -1,6 +1,6 @@
 package entities;
 
-import Constants.ShoppingConstants;
+import constants.ShoppingConstants;
 import exceptions.InvalidFieldException;
 import interfaces.Customer;
 
@@ -83,15 +83,7 @@ public class CustomerImpl implements Customer {
 
     @Override
     public void info() {
-        System.out.println();
-        System.out.println("Let's get started!");
-        System.out.println("Here is the list with all the commands you can use:");
-        System.out.println("Buy Product -> Example: buy-milk-2");
-        System.out.println("Return Product -> Example: return-milk-1");
-        System.out.println("Check what's in your shopping cart: Example: check");
-        System.out.println("Check what's available in the shop: Example: check all");
-        System.out.println("If you want to check all these commands again just type help");
-        System.out.println("But First Let's add some products to the shop! Example add-juice-10-2.50");
+        printInfo();
     }
 
     public void setName(String name) throws InvalidFieldException {
@@ -220,5 +212,17 @@ public class CustomerImpl implements Customer {
 
         BigDecimal bd = new BigDecimal(totalPrice).setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    private void printInfo() {
+        System.out.println();
+        System.out.println("Let's get started!");
+        System.out.println("Here is the list with all the commands you can use:");
+        System.out.println("Buy Product -> Example: buy-milk-2");
+        System.out.println("Return Product -> Example: return-milk-1");
+        System.out.println("Check what's in your shopping cart: Example: check");
+        System.out.println("Check what's available in the shop: Example: check all");
+        System.out.println("If you want to check all these commands again just type help");
+        System.out.println("But First Let's add some products to the shop! Example add-juice-10-2.50");
     }
 }
