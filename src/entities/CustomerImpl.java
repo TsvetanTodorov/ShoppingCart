@@ -90,6 +90,7 @@ public class CustomerImpl implements Customer {
 
     public void setName(String name) throws InvalidFieldException {
         validateCustomerName(name);
+        this.name = name;
     }
 
     public void setAge(String age) throws InvalidFieldException {
@@ -98,21 +99,24 @@ public class CustomerImpl implements Customer {
 
     public void setPhoneNumber(String phoneNumber) throws InvalidFieldException {
         validateCustomerPhoneNumber(phoneNumber);
+        this.phoneNumber = phoneNumber;
     }
 
     public void setAddress(String address) throws InvalidFieldException {
         validateCustomerAddress(address);
+        this.address = address;
     }
 
     public void setCity(String city) throws InvalidFieldException {
         validateCustomerCity(city);
+        this.city = city;
     }
 
-    private boolean isValidName(String name) {
+    private boolean isInvalidName(String name) {
         Pattern pattern = Pattern.compile("^(?:[a-zA-Z]+(?:-[a-zA-Z]+)?(?: [a-zA-Z]+)?){2,}$");
         Matcher matcher = pattern.matcher(name);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     private boolean isValidAge(String age) {
@@ -126,25 +130,25 @@ public class CustomerImpl implements Customer {
         return age > 120;
     }
 
-    private boolean isValidPhoneNumber(String phoneNumber) {
+    private boolean isNotValidPhoneNumber(String phoneNumber) {
         Pattern pattern = Pattern.compile("^\\d{10}$");
         Matcher matcher = pattern.matcher(phoneNumber);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
-    private boolean isValidAddress(String address) {
+    private boolean isNotValidAddress(String address) {
         Pattern pattern = Pattern.compile("^[a-zA-Z ]+,\\d+$");
         Matcher matcher = pattern.matcher(address);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
-    private boolean isValidCity(String city) {
+    private boolean isNotValidCity(String city) {
         Pattern pattern = Pattern.compile("[a-zA-Z]+");
         Matcher matcher = pattern.matcher(city);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     private boolean isNotExistingProduct(Product product) {
@@ -219,14 +223,10 @@ public class CustomerImpl implements Customer {
                     [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
         }
 
-        if (isValidName(name)) {
-            this.name = name;
-            return;
+        if (isInvalidName(name)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_NAME_ENTER_VALID_NAME]);
         }
-
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_NAME_ENTER_VALID_NAME]);
     }
 
 
@@ -258,15 +258,12 @@ public class CustomerImpl implements Customer {
                     [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_PHONE_NUMBER]);
         }
 
-        if (isValidPhoneNumber(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
-            return;
+        if (isNotValidPhoneNumber(phoneNumber)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_PHONE_NUMBER_THE_LENGTH_MUST_BE_10_DIGITS]
+                    + ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_RE_ENTER_PHONE_NUMBER]);
         }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_PHONE_NUMBER_THE_LENGTH_MUST_BE_10_DIGITS]
-                + ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_RE_ENTER_PHONE_NUMBER]);
     }
 
     private void validateCustomerAddress(String address) throws InvalidFieldException {
@@ -275,13 +272,10 @@ public class CustomerImpl implements Customer {
                     [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_ADDRESS]);
         }
 
-        if (isValidAddress(address)) {
-            this.address = address;
-            return;
+        if (isNotValidAddress(address)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_ADDRESS_ENTER_VALID_ADDRESS]);
         }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_ADDRESS_ENTER_VALID_ADDRESS]);
     }
 
 
@@ -291,13 +285,10 @@ public class CustomerImpl implements Customer {
                     [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_CITY]);
         }
 
-        if (isValidCity(city)) {
-            this.city = city;
-            return;
+        if (isNotValidCity(city)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_CITY_ENTER_VALID_CITY]);
         }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_CITY_ENTER_VALID_CITY]);
     }
 }
 
