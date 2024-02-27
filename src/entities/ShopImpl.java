@@ -1,5 +1,6 @@
 package entities;
 
+import constants.ShoppingConstants;
 import exceptions.InvalidFieldException;
 import interfaces.Shop;
 
@@ -27,21 +28,24 @@ public class ShopImpl implements Shop {
             products.put(newProductName, newProduct);
         }
 
-        System.out.printf("Successfully added the product: %s, with quantity: %d and price: %.2f to the shop!\n",
+        System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                        [ShoppingConstants.SHOP_DATA_INFO_SUCCESSFULLY_ADDED_PRODUCT],
                 newProductName, newProduct.getQuantity(), newProduct.getPrice());
     }
 
     @Override
     public void buyProduct(Product productToBuy) throws InvalidFieldException {
         if (isNotExistingProduct(productToBuy)) {
-            throw new InvalidFieldException("Sorry we don't have this product in the shop!");
+            throw new InvalidFieldException(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                    [ShoppingConstants.SHOP_DATA_INFO_UNAVAILABLE_PRODUCT]);
         }
 
         String productToBuyName = productToBuy.getName();
         Product existingProduct = products.get(productToBuyName.toLowerCase());
 
         if (hasEnoughQuantity(existingProduct, productToBuy)) {
-            throw new InvalidFieldException("Sorry we don't have that many " + productToBuyName);
+            throw new InvalidFieldException(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                    [ShoppingConstants.SHOP_DATA_INFO_NOT_ENOUGH_QUANTITY] + productToBuyName);
         }
 
         existingProduct.setQuantity(existingProduct.getQuantity() - productToBuy.getQuantity());
@@ -50,13 +54,16 @@ public class ShopImpl implements Shop {
         }
 
         if (productToBuy.getQuantity() == 1) {
-            System.out.printf("You successfully added %d %s to your shopping cart!\n",
+            System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                            [ShoppingConstants.SHOP_DATA_INFO_SUCCESSFULLY_ADDED_PRODUCT_TO_SHOPPING_CART],
                     productToBuy.getQuantity(), productToBuyName);
         } else {
-            System.out.printf("You successfully added %d %ss to your shopping cart!\n",
+            System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                            [ShoppingConstants.SHOP_DATA_INFO_SUCCESSFULLY_ADDED_PRODUCTS_TO_SHOPPING_CART],
                     productToBuy.getQuantity(), productToBuyName);
         }
-        System.out.println("Would you like to buy anything else ?");
+        System.out.println(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                [ShoppingConstants.SHOP_DATA_INFO_ANYTHING_ELSE_TO_BUY]);
 
     }
 
@@ -79,18 +86,22 @@ public class ShopImpl implements Shop {
     public void checkProductAvailability(String name) {
         if (products.containsKey(name)) {
             Product currentProduct = products.get(name);
-            System.out.printf("Yes! We have the product: %s, with %d available quantity!\n",
+            System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                            [ShoppingConstants.SHOP_DATA_INFO_AVAILABLE_PRODUCT_QUANTITY],
                     name, currentProduct.getQuantity());
         } else {
-            System.out.printf("Sorry! We don't have the product: %s\n", name);
+            System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                    [ShoppingConstants.SHOP_DATA_INFO_UNAVAILABLE_PRODUCT_BY_NAME], name);
         }
     }
 
     @Override
     public void checkAllProductsAvailability() {
-        System.out.println("Available products in the shop:");
+        System.out.println(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                [ShoppingConstants.SHOP_DATA_INFO_ALL_AVAILABLE_PRODUCTS]);
         for (Map.Entry<String, Product> productEntry : products.entrySet()) {
-            System.out.printf("%s , Price: %.2f, Quantity: %d\n",
+            System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
+                            [ShoppingConstants.SHOP_DATA_INFO_PRODUCT_NAME_PRICE_QUANTITY],
                     productEntry.getValue().getName(), productEntry.getValue().getPrice(), productEntry.getValue().getQuantity());
         }
     }

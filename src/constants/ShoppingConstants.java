@@ -90,8 +90,31 @@ public interface ShoppingConstants {
             "Invalid address! Please enter a valid address:",
             "You cannot enter an empty city!",
             "Invalid city! Please enter a valid city:"
-
     };
 
+
+    int SHOP_DATA_INFO_SUCCESSFULLY_ADDED_PRODUCT = 0;
+    int SHOP_DATA_INFO_UNAVAILABLE_PRODUCT = 1;
+    int SHOP_DATA_INFO_NOT_ENOUGH_QUANTITY = 2;
+    int SHOP_DATA_INFO_SUCCESSFULLY_ADDED_PRODUCT_TO_SHOPPING_CART = 3;
+    int SHOP_DATA_INFO_SUCCESSFULLY_ADDED_PRODUCTS_TO_SHOPPING_CART = 4;
+    int SHOP_DATA_INFO_ANYTHING_ELSE_TO_BUY = 5;
+    int SHOP_DATA_INFO_AVAILABLE_PRODUCT_QUANTITY = 6;
+    int SHOP_DATA_INFO_UNAVAILABLE_PRODUCT_BY_NAME = 7;
+    int SHOP_DATA_INFO_ALL_AVAILABLE_PRODUCTS = 8;
+    int SHOP_DATA_INFO_PRODUCT_NAME_PRICE_QUANTITY = 9;
+
+    String[] SHOP_DATA_INFO_VALUES = {
+            "Successfully added the product: %s, with quantity: %d and price: %.2f to the shop!\n",
+            "Sorry we don't have this product in the shop!",
+            "Sorry we don't have that many ",
+            "You successfully added %d %s to your shopping cart!\n",
+            "You successfully added %d %ss to your shopping cart!\n",
+            "Would you like to buy anything else ?",
+            "Yes! We have the product: %s, with %d available quantity!\n",
+            "Sorry! We don't have the product: %s\n",
+            "Available products in the shop:",
+            "%s , Price: %.2f, Quantity: %d\n"
+    };
 
 }
