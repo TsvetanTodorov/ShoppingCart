@@ -117,10 +117,6 @@ public class ShopImpl implements Shop {
         return existingProduct.getQuantity() < quantityToBuy;
     }
 
-    public Map<String, Product> getProducts() {
-        return products;
-    }
-
     public Product getProduct(String productName) {
         if (products.containsKey(productName)) {
             return products.get(productName);

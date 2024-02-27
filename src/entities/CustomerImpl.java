@@ -42,7 +42,6 @@ public class CustomerImpl implements Customer {
     @Override
     public void buyProduct(Product product) {
 
-
         if (shoppingCart.containsKey(product.getName())) {
             Product existingProduct = shoppingCart.get(product.getName());
             existingProduct.setQuantity(existingProduct.getQuantity() + product.getQuantity());
@@ -90,88 +89,23 @@ public class CustomerImpl implements Customer {
     }
 
     public void setName(String name) throws InvalidFieldException {
-        if (isNullOrBlank(name)) {
-            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
-        }
-
-        if (isValidName(name)) {
-            this.name = name;
-            return;
-        }
-
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_NAME_ENTER_VALID_NAME]);
+        validateCustomerName(name);
     }
 
     public void setAge(String age) throws InvalidFieldException {
-        if (isNullOrBlank(age)) {
-            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_AGE]);
-        }
-
-        if (isValidAge(age)) {
-            int parsedAge = Integer.parseInt(age);
-
-            if (isAgeNotRealistic(parsedAge)) {
-                throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                        [ShoppingConstants.CUSTOMER_DATA_INFO_TELL_US_YOUR_REAL_AGE]);
-            }
-
-            this.age = parsedAge;
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_AGE_ENTER_VALID_AGE]);
+        validateCustomerAge(age);
     }
 
     public void setPhoneNumber(String phoneNumber) throws InvalidFieldException {
-        if (isNullOrBlank(phoneNumber)) {
-            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_PHONE_NUMBER]);
-        }
-
-        if (isValidPhoneNumber(phoneNumber)) {
-            this.phoneNumber = phoneNumber;
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_PHONE_NUMBER_THE_LENGTH_MUST_BE_10_DIGITS]
-                + ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_RE_ENTER_PHONE_NUMBER]);
+        validateCustomerPhoneNumber(phoneNumber);
     }
 
     public void setAddress(String address) throws InvalidFieldException {
-        if (isNullOrBlank(address)) {
-            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_ADDRESS]);
-        }
-
-        if (isValidAddress(address)) {
-            this.address = address;
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_ADDRESS_ENTER_VALID_ADDRESS]);
+        validateCustomerAddress(address);
     }
 
     public void setCity(String city) throws InvalidFieldException {
-        if (isNullOrBlank(city)) {
-            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_CITY]);
-        }
-
-        if (isValidCity(city)) {
-            this.city = city;
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_CITY_ENTER_VALID_CITY]);
+        validateCustomerCity(city);
     }
 
     private boolean isValidName(String name) {
@@ -279,6 +213,91 @@ public class CustomerImpl implements Customer {
         return currentValue == null || currentValue.isBlank();
     }
 
+    private void validateCustomerName(String name) throws InvalidFieldException {
+        if (isNullOrBlank(name)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
+        }
 
+        if (isValidName(name)) {
+            this.name = name;
+            return;
+        }
+
+
+        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_NAME_ENTER_VALID_NAME]);
+    }
+
+
+    private void validateCustomerAge(String age) throws InvalidFieldException {
+        if (isNullOrBlank(age)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_AGE]);
+        }
+
+        if (isValidAge(age)) {
+            int parsedAge = Integer.parseInt(age);
+
+            if (isAgeNotRealistic(parsedAge)) {
+                throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                        [ShoppingConstants.CUSTOMER_DATA_INFO_TELL_US_YOUR_REAL_AGE]);
+            }
+
+            this.age = parsedAge;
+            return;
+        }
+
+        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_AGE_ENTER_VALID_AGE]);
+    }
+
+    private void validateCustomerPhoneNumber(String phoneNumber) throws InvalidFieldException {
+        if (isNullOrBlank(phoneNumber)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_PHONE_NUMBER]);
+        }
+
+        if (isValidPhoneNumber(phoneNumber)) {
+            this.phoneNumber = phoneNumber;
+            return;
+        }
+
+        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_PHONE_NUMBER_THE_LENGTH_MUST_BE_10_DIGITS]
+                + ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                [ShoppingConstants.CUSTOMER_DATA_INFO_RE_ENTER_PHONE_NUMBER]);
+    }
+
+    private void validateCustomerAddress(String address) throws InvalidFieldException {
+        if (isNullOrBlank(address)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_ADDRESS]);
+        }
+
+        if (isValidAddress(address)) {
+            this.address = address;
+            return;
+        }
+
+        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_ADDRESS_ENTER_VALID_ADDRESS]);
+    }
+
+
+    private void validateCustomerCity(String city) throws InvalidFieldException {
+        if (isNullOrBlank(city)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_CITY]);
+        }
+
+        if (isValidCity(city)) {
+            this.city = city;
+            return;
+        }
+
+        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_CITY_ENTER_VALID_CITY]);
+    }
 }
 
