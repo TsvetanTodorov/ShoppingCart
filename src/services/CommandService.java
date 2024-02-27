@@ -16,6 +16,8 @@ public class CommandService {
         this.customer = customer;
     }
 
+
+    //TODO: validate the correct commands! Example: add-juice instead add-juice-10-2.50;
     public void runCommands(String command, Scanner scanner) {
         while (true) {
 

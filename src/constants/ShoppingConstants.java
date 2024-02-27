@@ -117,4 +117,21 @@ public interface ShoppingConstants {
             "%s , Price: %.2f, Quantity: %d\n"
     };
 
+
+    int PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_NAME = 0;
+    int PRODUCT_DATA_INFO_INVALID_PRODUCT_NAME = 1;
+    int PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_PRICE = 2;
+    int PRODUCT_DATA_INFO_INVALID_PRODUCT_PRICE = 3;
+    int PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_QUANTITY = 4;
+    int PRODUCT_DATA_INFO_INVALID_PRODUCT_QUANTITY = 5;
+
+    String[] PRODUCT_DATA_INFO_VALUES = {
+            "You cannot enter an empty name of the product!",
+            "Invalid product name! Please enter a valid product name:",
+            "You cannot enter an empty price for the product!",
+            "Invalid product price! Please enter a valid product price:",
+            "You cannot enter an empty product quantity!",
+            "Invalid product quantity! Please enter a valid product quantity:"
+    };
+
 }

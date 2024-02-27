@@ -1,5 +1,6 @@
 package entities;
 
+import constants.ShoppingConstants;
 import exceptions.InvalidFieldException;
 
 import java.util.regex.Matcher;
@@ -25,7 +26,8 @@ public class Product {
 
     public void setName(String name) throws InvalidFieldException {
         if (isNullOrBlank(name)) {
-            throw new InvalidFieldException("You cannot enter an empty name of the product!");
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
         }
 
         if (isValidName(name)) {
@@ -33,12 +35,14 @@ public class Product {
             return;
         }
 
-        throw new InvalidFieldException("Invalid product name! Please enter a valid product name:");
+        throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_NAME]);
     }
 
     public void setPrice(String price) throws InvalidFieldException {
         if (isNullOrBlank(price)) {
-            throw new InvalidFieldException("You cannot enter an empty price for the product!");
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_PRICE]);
         }
 
         if (isValidPrice(price)) {
@@ -46,7 +50,8 @@ public class Product {
             return;
         }
 
-        throw new InvalidFieldException("Invalid product price! Please enter a valid product price:");
+        throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_PRICE]);
     }
 
     public void setPrice(double price) {
@@ -55,7 +60,8 @@ public class Product {
 
     public void setQuantity(String quantity) throws InvalidFieldException {
         if (isNullOrBlank(quantity)) {
-            throw new InvalidFieldException("You cannot enter an empty product quantity!");
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_QUANTITY]);
         }
 
         if (isValidQuantity(quantity)) {
@@ -63,7 +69,8 @@ public class Product {
             return;
         }
 
-        throw new InvalidFieldException("Invalid product quantity! Please enter a valid product quantity:");
+        throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_QUANTITY]);
     }
 
     public void setQuantity(int quantity) {
