@@ -17,26 +17,19 @@ public class CommandService {
     }
 
     public void runCommands(String command, Scanner scanner) {
-        while (!command.equals("Cash Out")) {
+        while (true) {
+
             Product product;
             String[] commandArr = command.split("-");
-
-            if (commandArr.length < 3) {
-                System.out.println("Invalid command");
-                command = scanner.nextLine();
-                continue;
-            }
             String commandType = commandArr[0];
-            String productName = commandArr[1];
-            String quantity = commandArr[2];
+            String productName;
+            String quantity;
             Product currentProduct;
+
             switch (commandType) {
                 case "add":
-                    if (commandArr.length != 4) {
-                        System.out.println("Invalid command");
-                        command = scanner.nextLine();
-                        continue;
-                    }
+                    productName = commandArr[1];
+                    quantity = commandArr[2];
                     String price = commandArr[3];
                     try {
                         product = new Product(productName, price, quantity);
