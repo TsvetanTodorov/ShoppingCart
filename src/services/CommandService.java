@@ -4,7 +4,6 @@ import entities.CustomerImpl;
 import entities.Product;
 import entities.ShopImpl;
 import exceptions.InvalidFieldException;
-
 import java.util.Scanner;
 
 public class CommandService {

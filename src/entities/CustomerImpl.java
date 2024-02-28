@@ -95,6 +95,7 @@ public class CustomerImpl implements Customer {
 
     public void setAge(String age) throws InvalidFieldException {
         validateCustomerAge(age);
+        this.age = Integer.parseInt(age);
     }
 
     public void setPhoneNumber(String phoneNumber) throws InvalidFieldException {
@@ -112,18 +113,18 @@ public class CustomerImpl implements Customer {
         this.city = city;
     }
 
-    private boolean isInvalidName(String name) {
+    private boolean isNotValidName(String name) {
         Pattern pattern = Pattern.compile("^(?:[a-zA-Z]+(?:-[a-zA-Z]+)?(?: [a-zA-Z]+)?){2,}$");
         Matcher matcher = pattern.matcher(name);
 
         return !matcher.matches();
     }
 
-    private boolean isValidAge(String age) {
+    private boolean isNotValidAge(String age) {
         Pattern pattern = Pattern.compile("^(?![0]$)\\d{1,3}$");
         Matcher matcher = pattern.matcher(age);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     private boolean isAgeNotRealistic(int age) {
@@ -180,7 +181,7 @@ public class CustomerImpl implements Customer {
 
     private void printHelpCommandInfo() {
         for (int i = 0; i < ShoppingConstants.commandsArr.length; i++) {
-            System.out.println("Command: " + ShoppingConstants.commandsArr[i] + "  -> " + ShoppingConstants.commandsDescription[i]);
+            System.out.println("Command: " + ShoppingConstants.commandsArr[i] + " -> " + ShoppingConstants.commandsDescription[i]);
         }
     }
 
@@ -223,7 +224,7 @@ public class CustomerImpl implements Customer {
                     [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
         }
 
-        if (isInvalidName(name)) {
+        if (isNotValidName(name)) {
             throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
                     [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_NAME_ENTER_VALID_NAME]);
         }
@@ -236,20 +237,17 @@ public class CustomerImpl implements Customer {
                     [ShoppingConstants.CUSTOMER_DATA_INFO_CANNOT_ENTER_EMPTY_AGE]);
         }
 
-        if (isValidAge(age)) {
-            int parsedAge = Integer.parseInt(age);
-
-            if (isAgeNotRealistic(parsedAge)) {
-                throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                        [ShoppingConstants.CUSTOMER_DATA_INFO_TELL_US_YOUR_REAL_AGE]);
-            }
-
-            this.age = parsedAge;
-            return;
+        if (isNotValidAge(age)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_AGE_ENTER_VALID_AGE]);
         }
 
-        throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
-                [ShoppingConstants.CUSTOMER_DATA_INFO_INVALID_AGE_ENTER_VALID_AGE]);
+        int parsedAge = Integer.parseInt(age);
+        if (isAgeNotRealistic(parsedAge)) {
+            throw new InvalidFieldException(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                    [ShoppingConstants.CUSTOMER_DATA_INFO_TELL_US_YOUR_REAL_AGE]);
+        }
+
     }
 
     private void validateCustomerPhoneNumber(String phoneNumber) throws InvalidFieldException {
