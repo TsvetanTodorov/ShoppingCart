@@ -25,33 +25,13 @@ public class Product {
 
 
     public void setName(String name) throws InvalidFieldException {
-        if (isNullOrBlank(name)) {
-            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
-                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
-        }
-
-        if (isValidName(name)) {
-            this.name = name;
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
-                [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_NAME]);
+        validateProductName(name);
+        this.name = name;
     }
 
     public void setPrice(String price) throws InvalidFieldException {
-        if (isNullOrBlank(price)) {
-            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
-                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_PRICE]);
-        }
-
-        if (isValidPrice(price)) {
-            this.price = Double.parseDouble(price);
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
-                [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_PRICE]);
+        validateProductPrice(price);
+        this.price = Double.parseDouble(price);
     }
 
     public void setPrice(double price) {
@@ -59,18 +39,8 @@ public class Product {
     }
 
     public void setQuantity(String quantity) throws InvalidFieldException {
-        if (isNullOrBlank(quantity)) {
-            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
-                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_QUANTITY]);
-        }
-
-        if (isValidQuantity(quantity)) {
-            this.quantity = Integer.parseInt(quantity);
-            return;
-        }
-
-        throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
-                [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_QUANTITY]);
+        validateProductQuantity(quantity);
+        this.quantity = Integer.parseInt(quantity);
     }
 
     public void setQuantity(int quantity) {
@@ -89,28 +59,64 @@ public class Product {
         return quantity;
     }
 
-    private boolean isValidName(String name) {
+    private boolean isNotValidName(String name) {
         Pattern pattern = Pattern.compile("^(?:[a-zA-Z]+(?:-[a-zA-Z]+)?(?: [a-zA-Z]+)?)$");
         Matcher matcher = pattern.matcher(name);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
-    private boolean isValidPrice(String price) {
+    private boolean isNotValidPrice(String price) {
         Pattern pattern = Pattern.compile("^\\d+(?:\\.\\d{1,2})?$");
         Matcher matcher = pattern.matcher(price);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
-    private boolean isValidQuantity(String quantity) {
+    private boolean isNotValidQuantity(String quantity) {
         Pattern pattern = Pattern.compile("^(?![0]$)\\d{1,4}$");
         Matcher matcher = pattern.matcher(quantity);
 
-        return matcher.matches();
+        return !matcher.matches();
     }
 
     private boolean isNullOrBlank(String currentValue) {
         return currentValue == null || currentValue.isBlank();
+    }
+
+    private void validateProductName(String name) throws InvalidFieldException {
+        if (isNullOrBlank(name)) {
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_NAME]);
+        }
+
+        if (isNotValidName(name)) {
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_NAME]);
+        }
+    }
+
+    private void validateProductPrice(String price) throws InvalidFieldException {
+        if (isNullOrBlank(price)) {
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_PRICE]);
+        }
+
+        if (isNotValidPrice(price)) {
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_PRICE]);
+        }
+    }
+
+    private void validateProductQuantity(String quantity) throws InvalidFieldException {
+        if (isNullOrBlank(quantity)) {
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_CANNOT_ENTER_EMPTY_QUANTITY]);
+        }
+
+        if (isNotValidQuantity(quantity)) {
+            throw new InvalidFieldException(ShoppingConstants.PRODUCT_DATA_INFO_VALUES
+                    [ShoppingConstants.PRODUCT_DATA_INFO_INVALID_PRODUCT_QUANTITY]);
+        }
     }
 }
