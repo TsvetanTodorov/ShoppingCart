@@ -1,9 +1,10 @@
-import entities.CustomerImpl;
-import entities.Product;
-import entities.ShopImpl;
-import exceptions.InvalidFieldException;
-import services.CommandService;
-import services.CustomerService;
+package main;
+
+import main.entities.CustomerImpl;
+import main.entities.ShopImpl;
+import main.exceptions.InvalidFieldException;
+import main.services.CommandService;
+import main.services.CustomerService;
 
 import java.util.Scanner;
 

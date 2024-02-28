@@ -1,9 +1,9 @@
-package services;
+package main.services;
 
-import entities.CustomerImpl;
-import entities.Product;
-import entities.ShopImpl;
-import exceptions.InvalidFieldException;
+import main.entities.CustomerImpl;
+import main.entities.Product;
+import main.entities.ShopImpl;
+import main.exceptions.InvalidFieldException;
 import java.util.Scanner;
 
 public class CommandService {

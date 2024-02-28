@@ -1,8 +1,8 @@
-package entities;
+package main.entities;
 
-import constants.ShoppingConstants;
-import exceptions.InvalidFieldException;
-import interfaces.Customer;
+import main.constants.ShoppingConstants;
+import main.exceptions.InvalidFieldException;
+import main.interfaces.Customer;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

@@ -1,11 +1,10 @@
-package entities;
+package main.entities;
 
-import constants.ShoppingConstants;
-import exceptions.InvalidFieldException;
-import interfaces.Shop;
+import main.constants.ShoppingConstants;
+import main.exceptions.InvalidFieldException;
+import main.interfaces.Shop;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ShopImpl implements Shop {

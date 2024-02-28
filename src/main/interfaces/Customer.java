@@ -1,7 +1,7 @@
-package interfaces;
+package main.interfaces;
 
-import entities.Product;
-import exceptions.InvalidFieldException;
+import main.entities.Product;
+import main.exceptions.InvalidFieldException;
 
 public interface Customer {
 

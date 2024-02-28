@@ -1,10 +1,9 @@
-package services;
+package main.services;
 
-import constants.ShoppingConstants;
-import entities.CustomerImpl;
-import exceptions.InvalidFieldException;
+import main.constants.ShoppingConstants;
+import main.entities.CustomerImpl;
+import main.exceptions.InvalidFieldException;
 
-import java.util.PrimitiveIterator;
 import java.util.Scanner;
 
 public class CustomerService {

@@ -1,7 +1,7 @@
-package entities;
+package main.entities;
 
-import constants.ShoppingConstants;
-import exceptions.InvalidFieldException;
+import main.constants.ShoppingConstants;
+import main.exceptions.InvalidFieldException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
