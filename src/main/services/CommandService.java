@@ -4,6 +4,7 @@ import main.entities.CustomerImpl;
 import main.entities.Product;
 import main.entities.ShopImpl;
 import main.exceptions.InvalidFieldException;
+
 import java.util.Scanner;
 
 public class CommandService {
@@ -15,20 +16,36 @@ public class CommandService {
         this.customer = customer;
     }
 
-
-    //TODO: validate the correct commands! Example: add-juice instead add-juice-10-2.50;
     public void runCommands(String command, Scanner scanner) {
         while (true) {
 
+            boolean isCheck = false;
             Product product;
             String[] commandArr = command.split("-");
             String commandType = commandArr[0];
+
+            if (commandType.contains("check")) {
+                isCheck = true;
+            }
+
+            if (!isCheck) {
+                if (commandArr.length < 3) {
+                    System.out.println("Invalid command");
+                    command = scanner.nextLine();
+                    continue;
+                }
+            }
             String productName;
             String quantity;
             Product currentProduct;
 
             switch (commandType) {
                 case "add":
+                    if (commandArr.length < 4) {
+                        System.out.println("Invalid command");
+                        command = scanner.nextLine();
+                        continue;
+                    }
                     productName = commandArr[1];
                     quantity = commandArr[2];
                     String price = commandArr[3];
