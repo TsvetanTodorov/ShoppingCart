@@ -101,7 +101,9 @@ public class ShopImpl implements Shop {
         for (Map.Entry<String, Product> productEntry : products.entrySet()) {
             System.out.printf(ShoppingConstants.SHOP_DATA_INFO_VALUES
                             [ShoppingConstants.SHOP_DATA_INFO_PRODUCT_NAME_PRICE_QUANTITY],
-                    productEntry.getValue().getName(), productEntry.getValue().getPrice(), productEntry.getValue().getQuantity());
+                    productEntry.getValue().getName(),
+                    productEntry.getValue().getPrice(),
+                    productEntry.getValue().getQuantity());
         }
     }
 

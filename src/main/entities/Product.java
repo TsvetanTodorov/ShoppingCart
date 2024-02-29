@@ -12,6 +12,10 @@ public class Product {
     private double price;
     private int quantity;
 
+
+    public Product() {
+    }
+
     public Product(String name, String price, String quantity) throws InvalidFieldException {
         setName(name);
         setPrice(price);

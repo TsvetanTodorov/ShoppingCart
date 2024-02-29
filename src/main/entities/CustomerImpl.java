@@ -205,13 +205,17 @@ public class CustomerImpl implements Customer {
     }
 
     private void printSuccessfullyReturnedOneProduct(int quantityToReturn, Product product) {
-        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCT],
-                quantityToReturn, product.getName());
+        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                        [ShoppingConstants.CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCT],
+                quantityToReturn,
+                product.getName());
     }
 
     private void printSuccessfullyReturnedManyProducts(int quantityToReturn, Product product) {
-        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES[ShoppingConstants.CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCTS],
-                quantityToReturn, product.getName());
+        System.out.printf(ShoppingConstants.CUSTOMER_DATA_INFO_VALUES
+                        [ShoppingConstants.CUSTOMER_DATA_INFO_SUCCESSFULLY_RETURNED_PRODUCTS],
+                quantityToReturn,
+                product.getName());
     }
 
     private boolean isNullOrBlank(String currentValue) {
