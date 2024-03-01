@@ -38,7 +38,7 @@ public interface ShoppingConstants {
     String[] GREETINGS_VALUES = {
             "Your registration was created successfully!",
             "Please enter your name:",
-            "Your name should be at least 2 digits long!",
+            "Your name should be at least 2 letters long!",
             "Please enter your age:",
             "Please enter your phone number:",
             "The length of your phone number must be 10 digits!",

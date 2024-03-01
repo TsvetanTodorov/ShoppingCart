@@ -139,7 +139,7 @@ public class CustomerImpl implements Customer {
     }
 
     private boolean isNotValidAddress(String address) {
-        Pattern pattern = Pattern.compile("^[a-zA-Z ]+,\\d+$");
+        Pattern pattern = Pattern.compile("^([a-zA-Z\\s]+),(\\d+)([A-Za-z]*)$");
         Matcher matcher = pattern.matcher(address);
 
         return !matcher.matches();

@@ -28,7 +28,7 @@ public class CommandService {
                 isCheck = true;
             }
 
-            if (!isCheck) {
+            if (!isCheck && !commandType.equals("help") && !commandType.equals("cash out")) {
                 if (commandArr.length < 3) {
                     System.out.println("Invalid command");
                     command = scanner.nextLine();
